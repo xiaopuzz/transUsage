@@ -33,7 +33,7 @@ for (j in c(1:length(geneName$V1))){
   data <- data[,!col_num]
   x <- cor(data)
   data <- data[,-findCorrelation(x,cutoff = 0.9)]
-  if (ncol(data) == 0){next}
+  if (is.null(ncol(data))){next}
   
   data$population <- Data$population
   data$population[which(data$population %in% c("CEU","TSI","FIN","GBR"))] <- "EUR"
@@ -75,7 +75,7 @@ for (j in c(1:length(geneName$V1))){
   geneframe[1,4] <- round(pvalue_glm,3)
 
   write.table(geneframe,
-              file=paste("~","res_CompareModel_14.csv",sep = "/"),
+              file=paste("~","resglm_whole.csv",sep = "/"),
               append=TRUE,
               col.names = FALSE)
 
